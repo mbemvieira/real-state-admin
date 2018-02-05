@@ -36,5 +36,5 @@ cp .env.example .env
 Set DB configurations on .env file and run the migrations and seeder:
 
 ```bash
-php artisan migrate --seed;
+php artisan migrate --seed
 ```
