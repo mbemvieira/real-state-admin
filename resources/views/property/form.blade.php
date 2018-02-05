@@ -15,7 +15,7 @@
         name="title" id="title"
         placeholder="Título"
         maxlength="100"
-        value="{{ $property->title or '' }}"
+        value="{{ old('title', isset($property->title) ? $property->title : '') }}"
     >
 </div>
 
@@ -26,17 +26,17 @@
         name="code" id="code"
         placeholder="Código"
         maxlength="20"
-        value="{{ $property->code or '' }}"
+        value="{{ old('code', isset($property->code) ? $property->code : '') }}"
     >
 </div>
 
 <div class="form-group">
     <label for="type">Tipo do imóvel *</label>
     <select class="form-control" name="type" id="type">
-        <option value="a"{{ isset($property) && $property->type == 'a' ? ' selected' : '' }}>
+        <option value="a"{{ old('type', isset($property) ? $property->type : null) == 'a' ? ' selected' : '' }}>
             Apartamento
         </option>
-        <option value="c"{{ isset($property) && $property->type == 'c' ? ' selected' : '' }}>
+        <option value="c"{{ old('type', isset($property) ? $property->type : null) == 'c' ? ' selected' : '' }}>
             Casa
         </option>
     </select>
@@ -51,7 +51,7 @@
         name="address_cep" id="address_cep"
         placeholder="CEP"
         maxlength="10"
-        value="{{ $property->address_cep or '' }}"
+        value="{{ old('address_cep', isset($property->address_cep) ? $property->address_cep : '') }}"
     >
 </div>
 
@@ -62,7 +62,7 @@
         name="address_street" id="address_street"
         placeholder="Endereço"
         maxlength="50"
-        value="{{ $property->address_street or '' }}"
+        value="{{ old('address_street', isset($property->address_street) ? $property->address_street : '') }}"
     >
 </div>
 
@@ -73,7 +73,7 @@
         name="address_number" id="address_number"
         placeholder="Número"
         maxlength="5"
-        value="{{ $property->address_number or '' }}"
+        value="{{ old('address_number', isset($property->address_number) ? $property->address_number : '') }}"
     >
 </div>
 
@@ -84,7 +84,7 @@
         name="address_neighbour" id="address_neighbour"
         placeholder="Bairro"
         maxlength="20"
-        value="{{ $property->address_neighbour or '' }}"
+        value="{{ old('address_neighbour', isset($property->address_neighbour) ? $property->address_neighbour : '') }}"
     >
 </div>
 
@@ -95,7 +95,7 @@
         name="address_complements" id="address_complements"
         placeholder="Complementos"
         maxlength="10"
-        value="{{ $property->address_complements or '' }}"
+        value="{{ old('address_complements', isset($property->address_complements) ? $property->address_complements : '') }}"
     >
 </div>
 
@@ -106,7 +106,7 @@
         name="address_city" id="address_city"
         placeholder="Cidade"
         maxlength="30"
-        value="{{ $property->address_city or '' }}"
+        value="{{ old('address_city', isset($property->address_city) ? $property->address_city : '') }}"
     >
 </div>
 
@@ -117,7 +117,7 @@
         name="address_state" id="address_state"
         placeholder="Estado"
         maxlength="20"
-        value="{{ $property->address_state or '' }}"
+        value="{{ old('address_state', isset($property->address_state) ? $property->address_state : '') }}"
     >
 </div>
 
@@ -130,7 +130,7 @@
         name="price" id="price"
         placeholder="Preço"
         maxlength="12"
-        value="{{ $property->price or '' }}"
+        value="{{ old('price', isset($property->price) ? $property->price : '') }}"
     >
 </div>
 
@@ -141,7 +141,7 @@
         name="area" id="area"
         placeholder="Área"
         maxlength="12"
-        value="{{ $property->area or '' }}"
+        value="{{ old('area', isset($property->area) ? $property->area : '') }}"
     >
 </div>
 
@@ -152,7 +152,7 @@
         name="number_bedrooms" id="number_bedrooms"
         placeholder="0"
         maxlength="1"
-        value="{{ $property->number_bedrooms or '' }}"
+        value="{{ old('number_bedrooms', isset($property->number_bedrooms) ? $property->number_bedrooms : '') }}"
     >
 </div>
 
@@ -163,7 +163,7 @@
         name="number_suite" id="number_suite"
         placeholder="0"
         maxlength="1"
-        value="{{ $property->number_suite or '' }}"
+        value="{{ old('number_suite', isset($property->number_suite) ? $property->number_suite : '') }}"
     >
 </div>
 
@@ -174,7 +174,7 @@
         name="number_bathrooms" id="number_bathrooms"
         placeholder="0"
         maxlength="1"
-        value="{{ $property->number_bathrooms or '' }}"
+        value="{{ old('number_bathrooms', isset($property->number_bathrooms) ? $property->number_bathrooms : '') }}"
     >
 </div>
 
@@ -185,7 +185,7 @@
         name="number_rooms" id="number_rooms"
         placeholder="0"
         maxlength="1"
-        value="{{ $property->number_rooms or '' }}"
+        value="{{ old('number_rooms', isset($property->number_rooms) ? $property->number_rooms : '') }}"
     >
 </div>
 
@@ -196,7 +196,7 @@
         name="number_parking_places" id="number_parking_places"
         placeholder="0"
         maxlength="1"
-        value="{{ $property->number_parking_places or '' }}"
+        value="{{ old('number_parking_places', isset($property->number_parking_places) ? $property->number_parking_places : '') }}"
     >
 </div>
 
@@ -209,9 +209,7 @@
         name="description" id="description"
         placeholder="Descrição do imóvel..."
         maxlength="300"
-    >
-        {{ $property->description or '' }}
-    </textarea>
+    >{{ old('description', isset($property->description) ? $property->description : '') }}</textarea>
 </div>
 
 <a type="button" class="btn btn-default" href="{{ route('properties.index') }}">
