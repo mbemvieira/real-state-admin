@@ -20,7 +20,7 @@ Laravel 5.5 application that manages properties.
 Clone this repo into your machine:
 
 ```bash
-git clone https://github.com/mbemvieira/crash-ratings-api
+git clone https://github.com/mbemvieira/real-state-admin
 ```
 
 Inside your repo folder, run the following commands:
