@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/properties', 'PropertyController');
+
+Route::post('/properties/import', 'PropertyController@import')->name('properties.import');

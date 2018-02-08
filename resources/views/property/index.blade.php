@@ -13,6 +13,31 @@
                 <div class="panel-heading">Imóveis</div>
 
                 <div class="panel-body">
+
+                    <form method="POST" accept-charset="UTF-8"
+                        action="{{ route('properties.import') }}"
+                        enctype="multipart/form-data"
+                        id="import-form"
+                    >
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="import">Importar Imóveis de arquivo XML</label>
+                            <input type="file" name="import" id="import">
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Importar">
+                    </form>
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <hr>
                     
                     <a type="button" class="btn btn-success" href="{{ route('properties.create') }}">
                         Adicionar Imóvel

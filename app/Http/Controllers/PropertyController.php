@@ -151,4 +151,56 @@ class PropertyController extends Controller
         $property->delete();
         return back();
     }
+
+    /**
+     * Import properties from file
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function import(Request $request)
+    {
+        $request->validate([
+            'import' => [
+                'required',
+                'file',
+                'mimetypes:application/xml,text/xml',
+                'mimes:xml',
+                'max:4096'
+            ],
+        ]);
+
+        $parsed_xml = simplexml_load_file($request->file('import'));
+        
+        foreach ($parsed_xml->Imoveis->Imovel as $property_xml) {
+            if (is_null(Property::where('code', $property_xml->CodigoImovel->__toString())->first())) {
+                $property = new Property;
+            
+                $property->title = 'Imovel '. $property_xml->CodigoImovel->__toString();
+                $property->code = $property_xml->CodigoImovel->__toString();
+                $property->type = $property_xml->TipoImovel->__toString() == 'Casa' ? 'c' : 'a';
+
+                $property->address_cep = $property_xml->CEP->__toString();
+                $property->address_street = null;
+                $property->address_number = $property_xml->Numero->__toString();
+                $property->address_neighbour = $property_xml->Bairro->__toString();
+                $property->address_complements = $property_xml->Complemento->__toString();
+                $property->address_city = $property_xml->Cidade->__toString();
+                $property->address_state = $property_xml->UF->__toString();
+
+                $property->price = $property_xml->PrecoVenda->__toString();
+                $property->area = $property_xml->AreaTotal->__toString();
+                $property->number_bedrooms = $property_xml->QtdDormitorios->__toString();
+                $property->number_suite = $property_xml->QtdSuites->__toString();
+                $property->number_bathrooms = $property_xml->QtdBanheiros->__toString();
+                $property->number_rooms = $property_xml->QtdSalas->__toString();
+                $property->number_parking_places = $property_xml->QtdVagas->__toString();
+                $property->description = $property_xml->Observacao->__toString();
+
+                $property->save();
+            }
+        }
+
+        return redirect()->route('properties.index');
+    }
 }

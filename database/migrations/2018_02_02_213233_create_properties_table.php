@@ -36,7 +36,7 @@ class CreatePropertiesTable extends Migration
             $table->unsignedTinyInteger('number_rooms')->nullable();
             $table->unsignedTinyInteger('number_parking_places')->nullable();
 
-            $table->string('description', 300)->nullable();
+            $table->string('description', 2000)->nullable();
             $table->string('image', 100)->nullable();
 
             $table->timestamps();
