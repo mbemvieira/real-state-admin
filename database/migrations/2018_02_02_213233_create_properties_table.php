@@ -24,7 +24,7 @@ class CreatePropertiesTable extends Migration
             $table->string('address_street', 50)->nullable();
             $table->string('address_number', 5)->nullable();
             $table->string('address_neighbour', 20)->nullable();
-            $table->string('address_complements', 10)->nullable();
+            $table->string('address_complements', 20)->nullable();
             $table->string('address_city', 30)->nullable();
             $table->string('address_state', 20)->nullable();
 
